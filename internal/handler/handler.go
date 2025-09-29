@@ -79,7 +79,7 @@ func (h *CommentHandler) SaveComment(c *gin.Context) {
 // @Failure 400 {string} string "Текст или ID комментария обязателен"
 // @Failure 404 {string} string "Комментарий не найден"
 // @Failure 500 {string} string "Не удалось обновить комментарий"
-// @Router /comments [put]
+// @Router /comments [patch]
 func (h *CommentHandler) ChangeComment(c *gin.Context) {
 	text := c.PostForm("text")
 	if text == "" {

@@ -36,34 +36,7 @@ paths:
       summary: Get comments (HTML page)
       tags:
       - comments
-    post:
-      consumes:
-      - application/x-www-form-urlencoded
-      parameters:
-      - description: Comment text
-        in: formData
-        name: text
-        required: true
-        type: string
-      produces:
-      - text/html
-      responses:
-        "303":
-          description: Redirect to /comments
-          schema:
-            type: string
-        "400":
-          description: Текст комментария обязателен
-          schema:
-            type: string
-        "500":
-          description: Не удалось сохранить комментарий
-          schema:
-            type: string
-      summary: Create a new comment (via form)
-      tags:
-      - comments
-    put:
+    patch:
       consumes:
       - application/x-www-form-urlencoded
       parameters:
@@ -97,6 +70,33 @@ paths:
           schema:
             type: string
       summary: Update a comment
+      tags:
+      - comments
+    post:
+      consumes:
+      - application/x-www-form-urlencoded
+      parameters:
+      - description: Comment text
+        in: formData
+        name: text
+        required: true
+        type: string
+      produces:
+      - text/html
+      responses:
+        "303":
+          description: Redirect to /comments
+          schema:
+            type: string
+        "400":
+          description: Текст комментария обязателен
+          schema:
+            type: string
+        "500":
+          description: Не удалось сохранить комментарий
+          schema:
+            type: string
+      summary: Create a new comment (via form)
       tags:
       - comments
 swagger: "2.0"

@@ -59,7 +59,48 @@ const docTemplate = `{
                     }
                 }
             },
-            "put": {
+            "post": {
+                "consumes": [
+                    "application/x-www-form-urlencoded"
+                ],
+                "produces": [
+                    "text/html"
+                ],
+                "tags": [
+                    "comments"
+                ],
+                "summary": "Create a new comment (via form)",
+                "parameters": [
+                    {
+                        "type": "string",
+                        "description": "Comment text",
+                        "name": "text",
+                        "in": "formData",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "303": {
+                        "description": "Redirect to /comments",
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    "400": {
+                        "description": "Текст комментария обязателен",
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    "500": {
+                        "description": "Не удалось сохранить комментарий",
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                }
+            },
+            "patch": {
                 "consumes": [
                     "application/x-www-form-urlencoded"
                 ],
@@ -107,47 +148,6 @@ const docTemplate = `{
                     },
                     "500": {
                         "description": "Не удалось обновить комментарий",
-                        "schema": {
-                            "type": "string"
-                        }
-                    }
-                }
-            },
-            "post": {
-                "consumes": [
-                    "application/x-www-form-urlencoded"
-                ],
-                "produces": [
-                    "text/html"
-                ],
-                "tags": [
-                    "comments"
-                ],
-                "summary": "Create a new comment (via form)",
-                "parameters": [
-                    {
-                        "type": "string",
-                        "description": "Comment text",
-                        "name": "text",
-                        "in": "formData",
-                        "required": true
-                    }
-                ],
-                "responses": {
-                    "303": {
-                        "description": "Redirect to /comments",
-                        "schema": {
-                            "type": "string"
-                        }
-                    },
-                    "400": {
-                        "description": "Текст комментария обязателен",
-                        "schema": {
-                            "type": "string"
-                        }
-                    },
-                    "500": {
-                        "description": "Не удалось сохранить комментарий",
                         "schema": {
                             "type": "string"
                         }

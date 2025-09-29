@@ -56,7 +56,7 @@ func App(cfg *config.Config) {
 	r.LoadHTMLGlob("cmd/app/templates/*")
 
 	r.GET("/swagger/*any", ginSwagger.WrapHandler(swaggerFiles.Handler))
-	r.PUT("/comments", h.ChangeComment)
+	r.PATCH("/comments", h.ChangeComment)
 	r.GET("/comments", h.GetComments)
 	r.POST("/comments", h.SaveComment)
 
