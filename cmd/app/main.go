@@ -9,6 +9,11 @@ import (
 	"github.com/joho/godotenv"
 )
 
+// @title Comment Service API
+// @version 1.0
+// @description HTML-based comment management API
+// @host localhost:8080
+// @BasePath /
 func main() {
 	if err := godotenv.Load(); err != nil {
 		log.Println("Warning: .env file not found. Using system environment variables")

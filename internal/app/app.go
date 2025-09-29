@@ -1,6 +1,7 @@
 package app
 
 import (
+	_ "commentsService/docs"
 	"commentsService/internal/config"
 	"commentsService/internal/handler"
 	"commentsService/internal/repo/storage"
@@ -16,7 +17,10 @@ import (
 	"syscall"
 	"time"
 
+	swaggerFiles "github.com/swaggo/files"
+
 	"github.com/gin-gonic/gin"
+	ginSwagger "github.com/swaggo/gin-swagger"
 )
 
 func dsn(cfg *config.Config) string {
@@ -51,6 +55,8 @@ func App(cfg *config.Config) {
 	r := gin.Default()
 	r.LoadHTMLGlob("cmd/app/templates/*")
 
+	r.GET("/swagger/*any", ginSwagger.WrapHandler(swaggerFiles.Handler))
+	r.PUT("/comments", h.ChangeComment)
 	r.GET("/comments", h.GetComments)
 	r.POST("/comments", h.SaveComment)
 

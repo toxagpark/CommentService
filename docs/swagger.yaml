@@ -1,0 +1,102 @@
+basePath: /
+host: localhost:8080
+info:
+  contact: {}
+  description: HTML-based comment management API
+  title: Comment Service API
+  version: "1.0"
+paths:
+  /comments:
+    get:
+      parameters:
+      - default: "0"
+        description: Offset for pagination
+        in: query
+        name: offset
+        type: string
+      - default: sortFromNew
+        description: 'Sort order: ''sortFromOldest'' or ''sortFromNew'''
+        enum:
+        - sortFromNew
+        - sortFromOldest
+        in: query
+        name: sort
+        type: string
+      produces:
+      - text/html
+      responses:
+        "200":
+          description: HTML page with comments
+          schema:
+            type: string
+        "500":
+          description: Failed to load comments
+          schema:
+            type: string
+      summary: Get comments (HTML page)
+      tags:
+      - comments
+    post:
+      consumes:
+      - application/x-www-form-urlencoded
+      parameters:
+      - description: Comment text
+        in: formData
+        name: text
+        required: true
+        type: string
+      produces:
+      - text/html
+      responses:
+        "303":
+          description: Redirect to /comments
+          schema:
+            type: string
+        "400":
+          description: Текст комментария обязателен
+          schema:
+            type: string
+        "500":
+          description: Не удалось сохранить комментарий
+          schema:
+            type: string
+      summary: Create a new comment (via form)
+      tags:
+      - comments
+    put:
+      consumes:
+      - application/x-www-form-urlencoded
+      parameters:
+      - description: Comment ID to update
+        in: formData
+        name: commentID
+        required: true
+        type: string
+      - description: New comment text
+        in: formData
+        name: text
+        required: true
+        type: string
+      produces:
+      - text/html
+      responses:
+        "303":
+          description: Redirect to /comments
+          schema:
+            type: string
+        "400":
+          description: Текст или ID комментария обязателен
+          schema:
+            type: string
+        "404":
+          description: Комментарий не найден
+          schema:
+            type: string
+        "500":
+          description: Не удалось обновить комментарий
+          schema:
+            type: string
+      summary: Update a comment
+      tags:
+      - comments
+swagger: "2.0"
