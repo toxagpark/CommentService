@@ -26,6 +26,9 @@ func NewUseCase(commentRepo usecase.CommentRepository) *UseCase {
 }
 
 func (uc *UseCase) SaveComment(ctx context.Context, userID string, text string) error {
+	if len(text) == 0 || len(text) > 200 {
+		return ErrSaveComment
+	}
 	err := uc.commentRepo.Save(ctx, userID, text)
 	if err != nil {
 		return fmt.Errorf("%w: %w", ErrSaveComment, err)
